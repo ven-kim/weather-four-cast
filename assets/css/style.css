@@ -1,3 +1,15 @@
 .forecast {
     margin: 0.3rem;
 }
+
+.list-group {
+    margin: 0.5rem;
+}
+
+.days {
+    display: none;
+}
+
+li {
+    text-transform: capitalize;
+}
