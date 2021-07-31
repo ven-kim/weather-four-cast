@@ -14,10 +14,21 @@
 		<h1><i class="fas fa-umbrella"></i> Weather City</h1>
 	</header>
 
+	<!-- Placed for Spacing -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<p></p>
+			</div>
+		</div>
+	</div>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-2">
+
+				<!-- search input -->
 				<h5>Search City:</h5>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="City Name">
@@ -26,17 +37,23 @@
 							<i class="fas fa-search"></i>
 						</button>
 						</div>
-					<ul class="list-group previous-cities"></ul>
+					<ul class="list-group past-cities"></ul>
 					</div>
 			</div>
+
 			<div class="col-8">
+				<!-- search results based on current day  -->
 				<h5>Current Forecast:</h5>
 				<div class="card w-75">
 					<div id="current-city" class="card-body city-name"></div>
 				</div>
+
+				<!-- search input 5-day forecast -->
 				<div class="forecast">
 					<h5>Five Day Forecast:</h5>
 					<div class="row" id="five-day">
+
+						<!-- day 1 -->
 						<div class="col-sm-2">
 							<div class="days card text-white bg-info mb-3">
 								<div id="1" class="card-body">
@@ -44,6 +61,8 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- day 2 -->
 						<div class="col-sm-2">
 							<div class="days card text-white bg-info mb-3">
 								<div id="2" class="card-body">
@@ -51,6 +70,8 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- day 3 -->
 						<div class="col-sm-2">
 							<div class="days card text-white bg-info mb-3">
 								<div id="3" class="card-body">
@@ -58,6 +79,8 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- day 4 -->
 						<div class="col-sm-2">
 							<div class="days card text-white bg-info mb-3">
 								<div id="4" class="card-body">
@@ -65,6 +88,8 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- day 5 -->
 						<div class="col-sm-2">
 							<div class="days card text-white bg-info mb-3">
 								<div id="5" class="card-body">
@@ -77,5 +102,8 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="assets/js/weather.js"></script>
 </body>
 </html>
