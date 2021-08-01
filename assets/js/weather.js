@@ -51,7 +51,7 @@ $(document).ready(function() {
 	function search(city) {
 
 		$(".days").show()
-		var queryURL1 = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=7eacf5331e789eb97f9990d729cb2139'
+		var queryURL1 = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=7eacf5331e789eb97f9990d729cb2139';
 		
 		$.when(
 			$.ajax({
@@ -72,9 +72,11 @@ $(document).ready(function() {
 						$('.city-name').empty();
 
 						var cityName = response.name;
+						// added formula for converting kelvin into fahrenheit
 						var temp = (response.main.temp - 273.15) * 9 / 5 + 32
 						var fahrenheit = $('<p>');
 						var humidity = $('<p>');
+						// added formula for converting meters per hour into miles per hour
 						var windSpeed = response.wind.speed * 2.236936;
 						var imperialWindSpeed = $('<p>');
 						var indexEl = $('<span>');
@@ -84,6 +86,7 @@ $(document).ready(function() {
 						indexNumberEl.text(indexNumber);
 						indexNumberEl.attr('id', 'index-number');
 
+						// color coding the UVI index based on current values
 						if (indexNumber <= 2) {
 							indexNumberEl.addClass('d-inline p-2 bg-success text-white')
 						} else if (indexNumber >= 3 && indexNumber <= 7) {
@@ -109,9 +112,62 @@ $(document).ready(function() {
 						$('.city-name').append(indexNumberEl);
 					})
 
-			// var queryURL3 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city +
+			var queryURL3 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=7eacf5331e789eb97f9990d729cb2139';
+			$.ajax({
+				url: queryURL3,
+				method: "GET"
+			})
+				.then(function(response3) {
+					$("#1").empty();
+					$("#2").empty();
+					$("#3").empty();
+					$("#4").empty();
+					$("#5").empty();
+
+					var dayOne = $('<h6>');
+					var dayTwo = $('<h6>');
+					var dayThree = $('<h6>');
+					var dayFour = $('<h6>');
+					var dayFive = $('<h6>');
+
+					dayOne.text(moment(date).add(1, 'days').format("MMM Do YY"));
+					dayTwo.text(moment(date).add(2, 'days').format("MMM Do YY"));
+					dayThree.text(moment(date).add(3, 'days').format("MMM Do YY"));
+					dayFour.text(moment(date).add(4, 'days').format("MMM Do YY"));
+					dayFive.text(moment(date).add(5, 'days').format("MMM Do YY"));
+
+					$('#1').append(dayOne);
+					$('#2').append(dayTwo);
+					$('#3').append(dayThree);
+					$('#4').append(dayFour);
+					$('#5').append(dayFive);
+					
+					var v = 1
+					for (var i = 0; i < response3.list.length; i++) {
+
+						if (response3.list[i].dt_txt.indexOf("12:00:00") !== -1 &&
+								response3.list[i].dt_txt.indexOf("15:00:00") !== -1 ||
+								response3.list[i].dt_txt.indexOf("18:00:00") !== -1) {
+
+								var selector = "#" + v;
+								var forecastTemp1 = (response3.list[i].main.temp_max - 273.15) * 9 / 5 + 32;
+								var forecastFahrenheit1 = $('<p>');
+								var forecastHumidity1 = $('<p>');
+								var forecastWeather1 = response3.list[i].weather[0].icon;
+								var weatherIcon1 = 'https://openweathermap.org/img/wn/' + forecastWeather1 + '.png';
+								var iconDisplay1 = $('<img>');
+								iconDisplay1.attr('src', weatherIcon1);
+								forecastFahrenheit1.text("Temp: " + forecastTemp1[i].main.humidity + '°F');
+								forecastHumidity1.text("Humidity: " + response3.list[i].main.humidity + '%');
+								$(selector).append(forecastFahrenheit1);
+								$(selector).append(forecastHumidity1);
+								$(selector).append(iconDisplay1);
+								v++;
+						}
+					}
+				})
 
 			})
 	}
 
-})
+});
