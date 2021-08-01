@@ -31,14 +31,14 @@
 				<!-- search input -->
 				<h5>Search City:</h5>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="City Name">
+						<input id="city-search-input" type="text" class="form-control" placeholder="City Name">
 						<div class="input-group-append">
-						<button class="btn btn-primary button" type="button">
+						<button id="search-btn" class="btn btn-primary button" type="button">
 							<i class="fas fa-search"></i>
 						</button>
 						</div>
+					</div>	
 					<ul class="list-group past-cities"></ul>
-					</div>
 			</div>
 
 			<div class="col-8">
@@ -102,7 +102,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script src="assets/js/weather.js"></script>
