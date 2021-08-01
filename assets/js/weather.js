@@ -62,7 +62,7 @@ $(document).ready(function() {
 			.then(function(response) {
 				var latitude = response.coord.lat;
 				var longititude = response.coord.lon;
-				var queryURL2 = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longititude + '&appid=7eacf5331e789eb97f9990d729cb2139'
+				var queryURL2 = 'https://api.openweathermap.org/data/2.5/uvi?&appid=7eacf5331e789eb97f9990d729cb2139&lat=' + latitude + '&lon=' + longititude;
 				
 				$.ajax({
 					url:queryURL2,
@@ -76,7 +76,41 @@ $(document).ready(function() {
 						var fahrenheit = $('<p>');
 						var humidity = $('<p>');
 						var windSpeed = response.wind.speed * 2.236936;
+						var imperialWindSpeed = $('<p>');
+						var indexEl = $('<span>');
+						indexEl.text("UV Index: ");
+						var indexNumber = parseFloat(response2.value);
+						var indexNumberEl = $('<span>');
+						indexNumberEl.text(indexNumber);
+						indexNumberEl.attr('id', 'index-number');
+
+						if (indexNumber <= 2) {
+							indexNumberEl.addClass('d-inline p-2 bg-success text-white')
+						} else if (indexNumber >= 3 && indexNumber <= 7) {
+							indexNumberEl.addClass('d-inline p-2 bg-warning text-white')
+						} else {
+							indexNumberEl.addClass('d-inline p-2 bg-danger text-white')
+						}
+
+						var todaysWeather = response.weather[0].icon;
+						fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
+						humidity.text("Humidity: " + response.main.humidity + "%")
+						imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
+
+						var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
+						var iconDisplay = $('<img>')
+						iconDisplay.attr('src', weatherIcon);
+						$('.city-name').append(cityName + ": " + date);
+						$('.city-name').append(iconDisplay);
+						$('.city-name').append(fahrenheit);
+						$('.city-name').append(humidity);
+						$('.city-name').append(imperialWindSpeed);
+						$('.city-name').append(indexEl);
+						$('.city-name').append(indexNumberEl);
 					})
+
+			// var queryURL3 = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city +
+
 			})
 	}
 
